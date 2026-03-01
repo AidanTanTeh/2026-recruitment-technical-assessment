@@ -1,0 +1,9 @@
+node_modules
+dist
+.cache
+.cache*
+npm-debug.log*
+pnpm-debug.log*
+.DS_Store
+.git
+.gitignore
