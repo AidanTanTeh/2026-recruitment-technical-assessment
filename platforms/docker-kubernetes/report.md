@@ -13,12 +13,27 @@ Sources I used to learn and implement some of the code:
 - https://www.youtube.com/watch?v=pg19Z8LL06w&t=750s
 - https://www.youtube.com/watch?v=WmcdMiyqfZs&t=1093s
 
+Goal for code: containerise the unsw-calneder-api app using docker
+
+key decisions:
+1) i chose to use node:24-slim because package.json specifies Node >=24.10.0 <25, and slim keeps the image smaller than the full Debian image.
+
+2) i made sure to copy only package.json, pnpm-lock.yaml, and pnpm-workspace.yaml first, then only running install.
+
+3) the app uses uses pnpm, so I used corepack enable so that the container can always use the same pnpm version without manually installing pnpm globally.
+
+4) i used pnpm run build with a multi-stage build which outputs compiled JS to dist/.
+
+5) in the runtime stage, I install only production dependencies using pnpm install --prod and copied it into /dist. Then, I set NODE_ENV=production to reflect a production runtime.
+
+NOTE:
+build the docker with: docker build -t unsw-calendar-api .
 
 
 ### Forked repository
 
 <!-- TODO: If you submitted your changes to a fork, replace with your forked repository -->
-`https://github.com/your-username/academic-calendar-api`
+`https://github.com/AidanTanTeh/2026-recruitment-technical-assessment.git`
 
 ## Kubernetes
 
